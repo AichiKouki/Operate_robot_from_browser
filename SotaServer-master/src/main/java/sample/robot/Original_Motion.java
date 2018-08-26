@@ -57,19 +57,19 @@ public class Original_Motion {
 			}
 			CRobotUtil.wait(2000);//ミリ秒を指定。2000は2秒。2秒処理を待機する
 				
-				//手を下ろす
-				pose = new CRobotPose();
-				//第2引数（Short[]）にて制御対象の角度を指定
-				pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
-							,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
-				);
-				pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
-				motion.play(pose,1000);
-				motion.waitEndinterpAll();
-	
-				//サーボモータのトルクオフ
-				//CRobotUtil.Log(TAG, "Servo Off");
-				//motion.ServoOff();
+			//手を下ろす
+			pose = new CRobotPose();
+			//第2引数（Short[]）にて制御対象の角度を指定
+			pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
+						,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
+			);
+			pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
+			motion.play(pose,1000);
+			motion.waitEndinterpAll();
+
+			//サーボモータのトルクオフ
+			//CRobotUtil.Log(TAG, "Servo Off");
+			//motion.ServoOff();
 		}
 	}
 	

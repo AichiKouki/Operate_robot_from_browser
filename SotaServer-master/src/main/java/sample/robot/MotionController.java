@@ -91,37 +91,38 @@ public class MotionController implements Controller {
     CRobotUtil.wait(500);
   }
 
+//曲げすぎて故障しないように制限をかけている
   private Short limitAngle(Byte key, Short val) {
     switch(key) {
-      case SV_BODY_Y:
+      case SV_BODY_Y://体全体を回転
         if (val < -1000) val = -1000;
         if (val >  1000) val =  1000;
         break;
-      case SV_L_SHOULDER:
+      case SV_L_SHOULDER: //左手をあげる
         if (val <  -500) val =  -500;
-        if (val >     0) val =     0;
+        if (val >  500) val =   500;
         break;
-      case SV_L_ELBOW:
+      case SV_L_ELBOW://左手の肘を曲げる
         if (val < -1000) val = -1000;
-        if (val >   200) val =   200;
+        if (val >   800) val =   800;
         break;
-      case SV_R_SHOULDER:
-        if (val <     0) val =     0;
+      case SV_R_SHOULDER://右手をあげる(マイナスで上にあげる)
+        if (val <     -500) val =  500;
         if (val >   500) val =   500;
         break;
-      case SV_R_ELBOW:
-        if (val <  -200) val =  -200;
+      case SV_R_ELBOW://右手の肘を曲げる
+        if (val <  -800) val =  -800;
         if (val >  1000) val =  1000;
         break;
-      case SV_HEAD_Y:
+      case SV_HEAD_Y://頭を横に向ける
         if (val <  -500) val =  -500;
         if (val >   500) val =   500;
         break;
-      case SV_HEAD_P:
-        if (val <  -250) val =  -250;
+      case SV_HEAD_P://頭を上に向ける
+        if (val <  -300) val =  -300;
         if (val >    50) val =    50;
         break;
-      case SV_HEAD_R:
+      case SV_HEAD_R://頭を横にかしげる
         if (val <  -200) val =  -200;
         if (val >   200) val =   200;
         break;

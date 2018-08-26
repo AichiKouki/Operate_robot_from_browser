@@ -7,7 +7,9 @@
 ●MyWebSocketListener.javaで、onWebSocketTextメソッドの中では、 json = gson.fromJson(message, Message.class);でscript.jsからの値を取得して、その後ここからRobotAPI.javaのcallメソッドを読んでいる
 ●RobotAPI.javaで、callメソッドの中では、Controllerクラスの変数に、MotionControllerのインスタンスを入れている。そして、Controller.javaのexecuteActionメソッドを呼び出している
 
+〜その他メモ〜
 ●javascriptからjavaに渡したい値を増やしたかったら、Message.javaを編集する
+●MotionControllerでmanualのパラメータの値に制限をかけている
 
 〜ざっくり〜
 Message.javaで、パラメータを定義
