@@ -71,7 +71,7 @@ public class Original_Motion {
 			pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
 						,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
 			);
-			pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
+			//pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
 			motion.play(pose,1000);
 			motion.waitEndinterpAll();
 
@@ -80,6 +80,8 @@ public class Original_Motion {
 			//motion.ServoOff();
 		}
 	}
+	
+
 	
 	//あざといポーズ
 	public static void Azatoi(CRobotPose pose,CSotaMotion motion){
@@ -103,7 +105,7 @@ public class Original_Motion {
 		motion.waitEndinterpAll();
 		
 		//じゃんけんを開始することを喋る
-		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("僕とじゃんけんで勝負だよ。せーの、最初はぐー",10,13,11),true);			
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("僕とじゃんけんで勝負だよ。せーの、最初わグー",10,13,11),true);			
 		
 		//最初は右手でグーを出す
 		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, -500, 0, 0, 0 });
@@ -130,6 +132,5 @@ public class Original_Motion {
 		motion.waitEndinterpAll();
 
 		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("勝てたかな？。僕はグーしか出せないのにパーを出していないことを祈ります。",10,13,11),true);
-
 	}
 }
