@@ -46,8 +46,16 @@ public class Original_Motion {
 			*/
 			
 			//LEDを点灯（左目：赤、右目：赤、口：Max、電源ボタン：赤）
-			pose = new CRobotPose();
-			pose.setLED_Sota(Color.RED, Color.RED, 255, Color.RED);
+			//pose.setLED_Sota(Color.RED, Color.RED, 255, Color.RED);
+			
+		pose = new CRobotPose();		
+		//ポーズを修正	
+		pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
+						,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
+			);		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();
 
 			//あざといポーズ
 			if(motion_family.equals("original1")){
@@ -85,16 +93,43 @@ public class Original_Motion {
 		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("あざといポーズだよ",10,13,11),true);
 	}
 	
-	//手を振るモーション
+	//じゃんけんのモーション
 	public static void Wave_hands(CRobotPose pose,CSotaMotion motion){
-		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, 180, 0, -180, 0 });
+		//まず両手を下げる
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, -500, 0, 500, 0 });
 		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
 		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
 		//補間完了まで待つ
-		motion.waitEndinterpAll();			
+		motion.waitEndinterpAll();
 		
-		//文字列で喋らせる
-		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("両手を上げてみた",10,13,11),true);
+		//じゃんけんを開始することを喋る
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("僕とじゃんけんで勝負だよ。せーの、最初はぐー",10,13,11),true);			
+		
+		//最初は右手でグーを出す
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, -500, 0, 0, 0 });
+		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();
+		
+		//「じゃんけん」と喋りながら右手を上にあげる
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("じゃんけん",10,13,11),true);		
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, -500, 0, -500, 0 });
+		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();	
+
+		//「ぽん」と言ってグーを出す
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("ぽん",10,13,11),true);
+
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, -500, 0, 0, 0 });
+		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();
+
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("勝てたかな？。僕はグーしか出せないのにパーを出していないことを祈ります。",10,13,11),true);
 
 	}
 }
