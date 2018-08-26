@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Sota Socket</title>
+  <title>webからロボット操作</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><!--必ずjQuery本体を先に読み込む-->
   <!--websocket関連-->
   <script type="text/javascript" src="script.js"></script>
@@ -28,7 +28,7 @@
   </style>
 </head>
 <body>
-  <h1>そーたくんを操作する</h1>
+  <h1>ロボットをWebから操作する</h1>
   <p>接続状態: <span id="connectionStatus"></span></p>
   <div id="messageBox">
     <form id="createMessage">
@@ -54,7 +54,7 @@
 		-->
         <br>
         <!--喋らせる言葉-->
-        <input type="text" name="speechText" id="speechText" value=""><label for="action">喋らせる言葉: </label>
+        <input type="text" name="speechText" id="speechText" value=""><label for="action">喋らせる言葉 </label>
         <br>
         <!--manualを選択した際に細かく手足の位置を指定するための入力ボックス-->
         <div id="messageData" style="display: none">
@@ -100,7 +100,7 @@
             <label for="data[val][]"> :頭を横にかしげる(-200〜200)(プラスの値で左にかしげる)(100単位)</label>
           </div>
         </div>
-        <button id="submitMessage">submit</button>
+        <button id="submitMessage">ロボット実行</button>
       </fieldset>
     </form>
     <div id="messageBoard">
