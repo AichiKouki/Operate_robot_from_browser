@@ -63,9 +63,6 @@ MessageBox = {
       data[keys[i].value]  = vals[i].value;
     }
     
-    //オリジナルのモーションをさせるか
-    var do_original_motion=false;//このスクリプトは関係ないのでfalseで固定
-    var motion_family=$(this).val();//モーションの種類を設定
 //index.htmlから受け取ったアクションの名前を設定
     var message = {
       'action': action,

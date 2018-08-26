@@ -27,7 +27,6 @@ public class RobotAPI {
   static final String TAG = "RobotAPI";
 
   public static void call(Message json) {
-    LOG.info("愛知愛知、RobotAPIは実行された");
     boolean properlySetUp = setUpRobot();
     if (!properlySetUp) return;
     //actionがoriginalなら、以下の処理はしないで、オリジナルのクラスを作ってそれを実行
@@ -36,6 +35,8 @@ public class RobotAPI {
     	Original_Motion original_motion = new Original_Motion();
     	original_motion.do_motion(json.action);
     }else{
+    LOG.info("愛知愛知、actionの値は"+json.action);
+    LOG.info("愛知愛知、dataの値は"+json.data);    
     //手足を動かすためにControllerクラスにactionとdataを渡す
     Controller controller = new MotionController();
     controller.executeAction(json.action, json.data);//json.actionでhtmlで選択したactionを取得

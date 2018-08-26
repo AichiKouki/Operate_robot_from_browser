@@ -13,7 +13,7 @@ import jp.vstone.sotatalk.TextToSpeechSota;
  *
  */
 public class Original_Motion {
-	static final String TAG = "MotionSample";
+	static final String TAG = "Original_Motion";
 	public void do_motion(String motion_family){
 		CRobotUtil.Log(TAG, "Start " + TAG);
 
@@ -34,68 +34,67 @@ public class Original_Motion {
 			motion.ServoOn();
 
 			//すべての軸を動作
+			/*
 			pose = new CRobotPose();
 			pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
 			,  new Short[]{0   ,-900,0   ,900 ,0   ,0   ,0   ,0}				//target pos
 					);
+
+				//音声ファイル再生
+				//raw　Waveファイルのみ対応
+				//CPlayWave.PlayWave("sound/kimigayo_hatune.wav");
+			*/
+			
 			//LEDを点灯（左目：赤、右目：赤、口：Max、電源ボタン：赤）
+			pose = new CRobotPose();
 			pose.setLED_Sota(Color.RED, Color.RED, 255, Color.RED);
 
-			//遷移時間1000msecで動作開始。
-			CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
-
-			//補間完了まで待つ
-			motion.waitEndinterpAll();
-
-			//一部の軸を指定して動作
-			//CSotaMotionの定数を利用してID指定する場合
-			pose = new CRobotPose();
-			pose.SetPose(new Byte[] {CSotaMotion.SV_HEAD_R, CSotaMotion.SV_L_SHOULDER,CSotaMotion.SV_L_ELBOW,CSotaMotion.SV_R_ELBOW}	//id
-						,  new Short[]{200, 700 ,-200,200}	//target pos
-			);
-			pose.setLED_Sota(Color.GREEN, Color.GREEN, 255, Color.GREEN);
-			motion.play(pose,1000);
-			motion.waitEndinterpAll();
-			
-			//文字列で喋らせる
-			CPlayWave.PlayWave(TextToSpeechSota.getTTS("こんにちは。僕はそーたくんだよ。愛知こうき君。これからよろしくね！"),true);
-			CPlayWave.PlayWave(TextToSpeechSota.getTTS("では、いきなりですが歌わせていただきます！"),true);
-			//音声ファイル再生
-			//raw　Waveファイルのみ対応
-			//CPlayWave.PlayWave("sound/cursor10.wav");
-			//CPlayWave.PlayWave("sound/kimigayo_hatune.wav");
+			//あざといポーズ
+			if(motion_family.equals("original1")){
+				Azatoi(pose,motion);
+			}else if(motion_family.equals("original2")){
+				Wave_hands(pose,motion);
+			}
 			CRobotUtil.wait(2000);//ミリ秒を指定。2000は2秒。2秒処理を待機する
-			
-			CPlayWave.PlayWave(TextToSpeechSota.getTTS("ありがとうございました。また歌ってほしいときは言ってね"),true);
-
-			pose = new CRobotPose();
-			//第2引数（Short[]）にて制御対象の角度を指定
-			pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
-						,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
-			);
-			pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
-			motion.play(pose,1000);
-			motion.waitEndinterpAll();
-
-			//サーボモータのトルクオフ
-			CRobotUtil.Log(TAG, "Servo Off");
-			motion.ServoOff();
+				
+				//手を下ろす
+				pose = new CRobotPose();
+				//第2引数（Short[]）にて制御対象の角度を指定
+				pose.SetPose(new Byte[] {1   ,2   ,3   ,4   ,5   ,6   ,7   ,8}	//id
+							,  new Short[]{0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0}	//target pos
+				);
+				pose.setLED_Sota(Color.BLUE, Color.BLUE, 255, Color.BLUE);
+				motion.play(pose,1000);
+				motion.waitEndinterpAll();
+	
+				//サーボモータのトルクオフ
+				//CRobotUtil.Log(TAG, "Servo Off");
+				//motion.ServoOff();
 		}
 	}
+	
+	//あざといポーズ
+	public static void Azatoi(CRobotPose pose,CSotaMotion motion){
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, 180, -850, -180, 850 });
+		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();			
+		
+		//文字列で喋らせる
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("あざといポーズだよ",10,13,11),true);
+	}
+	
+	//手を振るモーション
+	public static void Wave_hands(CRobotPose pose,CSotaMotion motion){
+		pose.SetPose(new Byte[] { 1, 2, 3, 4, 5 }, new Short[] { 0, 180, 0, -180, 0 });
+		//遷移時間1000msecで動作開始。つまり1秒間かけて動かす
+		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
+		//補間完了まで待つ
+		motion.waitEndinterpAll();			
+		
+		//文字列で喋らせる
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("両手を上げてみた",10,13,11),true);
+
+	}
 }
-/*
- ～Sotaのモーション指定のメモ～
- 単位は、「1当たり0.1度」となります。
-
-また、各軸の制御限界範囲は下記になります。
-
-・ピッチ軸(うなずく方向)：
-(上を向く) -290 ～   80(下を向く)
-
-・ヨー軸(かしげる方向)：
-(右に傾く) -250 ～  250(左に傾く)
-
-・ロール軸(振り向く方向)：
-(右を向く)-1450 ～ 1450(左を向く)
-
- */
