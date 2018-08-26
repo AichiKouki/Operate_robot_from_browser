@@ -1,0 +1,15 @@
+●音声合成機能を追加するには、libに大学でのsotaSampleのlibを入れる。特に、「sotalib」は大学のやつと入れ替える
+●gitからクローンして、このディレクトリに移動して、ターミナルで「gradle build」を入力して実行。すると、buildフォルダが作成されてファイルが作成される
+●SotaSample_aichiを、eclipseで開く
+●libに、さっきのbuildの中のSotaServer-master.jarを入れる
+●send.xmlの中の25行目のを、sotalib.jarからSotaServer-master.jarに変更
+
+●ssh接続して、jarファイルを実行
+ssh pi@192.168.2.2
+cd SotaSample_Use_Browser/lib
+java -jar SotaServer-master.jar
+
+これで動く
+ブラウザで、
+http://192.168.2.2:3000/
+にアクセス

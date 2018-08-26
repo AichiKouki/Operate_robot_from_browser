@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sota Socket</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><!--必ずjQuery本体を先に読み込む-->
+  <!--websocket関連-->
+  <script type="text/javascript" src="script.js"></script>
+  <!--喋る内容を表すinputフィールドの値を自動入力のため-->
+ <script type="text/javascript" src="automatically_enter_characters.js"></script>
+   <!--機能拡張のため-->
+ <script type="text/javascript" src="add_function.js"></script>
+  <!--よく使う言葉を登録・表示するため-->
+  <script type="text/javascript" src="Register_and_display_frequently_occurring_words.js"></script>
+  <style>
+    body {
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -o-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    #submitMessage {
+      height: 2rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>そーたくんを操作する</h1>
+  <p>接続状態: <span id="connectionStatus"></span></p>
+  <div id="messageBox">
+    <form id="createMessage">
+      <fieldset>
+        <legend>喋る言葉と動きを指定</legend>
+        <label for="action">Action: </label>
+       
+        <select name="action">
+          <option value="index">index</option>
+          <option value="kangFu">kangFu</option>
+          <option value="banzai">banzai</option>
+          <option value="manual">manual</option>
+          <option value="original1">オリジナル1</option>
+        </select>
+        
+        <!--ラジオボタンでモーション指定-->
+        <!--
+        <input type="radio" name="action" value="index" checked>index
+		<input type="radio" name="action" value="kangFu">kangFu
+		<input type="radio" name="action" value="banzai">banzai
+		<input type="radio" name="action" value="manual">manual
+		-->
+        <br>
+        <!--喋らせる言葉-->
+        <input type="text" name="speechText" id="speechText" value=""><label for="action">喋らせる言葉: </label>
+        <br>
+        <!--manualを選択した際に細かく手足の位置を指定するための入力ボックス-->
+        <div id="messageData" style="display: none">
+        Data:
+          <div id="defautlItem" class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="1" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :体全体を回転する(-1000〜1000)(プラスで左)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="2" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :左手を上げたり下げたり(-500〜500)(マイナスであげる)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="3" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :左手のひじを曲げる(-200〜900)(値が大きいほど曲がり小さいほど広げる)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="4" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :右手を上げたり下げたり(-500〜500)(マイナスであげる)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="5" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :右手のひじを曲げる(-200〜900)(値が大きいほど曲がり小さいほど広げる)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="6" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :頭を横に向く(-500〜500)(プラスの値で左に向く)(Y軸回転)(100単位)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="7" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :頭を上に向く(-300〜0)(マイナスの値で上を向く。0でまっすぐになる。下は向かない)(100単位)</label>
+          </div>
+          <div class="keyValueItem">
+            <input name="data[key][]" type="hidden" placeholder="input data key" value="8" />
+            <input name="data[val][]" type="number" placeholder="input data value" />
+            <label for="data[val][]"> :頭を横にかしげる(-200〜200)(プラスの値で左にかしげる)(100単位)</label>
+          </div>
+        </div>
+        <button id="submitMessage">submit</button>
+      </fieldset>
+    </form>
+    <div id="messageBoard">
+      <div id="itemList">
+      </div>
+    </div>
+  </div>
+  <!--よく使う言葉を登録したり表示したりする-->
+  <!--
+        <fieldset>
+        <legend>よく使う言葉を登録・表示</legend>
+        <div>
+        <input type="text" name="register_sentences" value="">
+        <button id="register_button">よく使う言葉を登録</button>
+        </div>
+        </fieldset>
+--->
+<!--自動入力させるためのボタン-->
+<div id="words_button">
+<button id="frequent_words1">null2xの紹介</button>
+<button id="frequent_words2">自己紹介</button>
+<button id="frequent_words3">ありがとうございます</button>
+<button id="frequent_words4">早口言葉</button>
+<button id="frequent_words5">シャンシャイン池崎</button>
+</div>
+
+<!--ボタンを押したらすぐに任意のモーションをさせるためのボタン-->
+<div>
+<input type="button" value="original1" id="motion_button">
+</div>
+</body>
+</html>

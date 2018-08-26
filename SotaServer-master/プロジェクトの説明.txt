@@ -1,0 +1,22 @@
+●src/main/resourcesの中に、index.htmlとscript.jsがある
+●index.htmlに、index、banzai、kanguhuなどの操作させたいパラメータがある。
+●index.htmlの下の方にあるidが「submitMessage」のsubmitボタンを押すと、javascriptのイベントが発生して、script.jsの中の「submitMessage」の部分が処理される
+●script.jsの中に、全てのパラータに対する手足の座標を作成している。おそらくその値もjava側のサーバに渡す
+●script.jsで、WebSocketインスタンスを作成して、sendメソッドを呼び出して、actionの種類とmanualを選択した際の細かいパラメータが入ってるdataを送信
+●おそらく、websocketのsendメソッドを使うと、MyWebSocketListenerのメソッドは自動的に呼ばれるかも
+●MyWebSocketListener.javaで、onWebSocketTextメソッドの中では、 json = gson.fromJson(message, Message.class);でscript.jsからの値を取得して、その後ここからRobotAPI.javaのcallメソッドを読んでいる
+●RobotAPI.javaで、callメソッドの中では、Controllerクラスの変数に、MotionControllerのインスタンスを入れている。そして、Controller.javaのexecuteActionメソッドを呼び出している
+
+●javascriptからjavaに渡したい値を増やしたかったら、Message.javaを編集する
+
+〜ざっくり〜
+Message.javaで、パラメータを定義
+index.htmlで送信
+↓
+script.js
+↓
+MyWebSocketListener.java
+↓
+RobotAPI.java
+↓
+Controller.java
