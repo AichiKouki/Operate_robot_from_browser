@@ -92,7 +92,7 @@ public class Original_Motion {
 		motion.waitEndinterpAll();			
 		
 		//文字列で喋らせる
-		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("あざといポーズだよ",10,13,11),true);
+		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("僕のあざといポーズを見て！",10,13,11),true);
 	}
 	
 	//じゃんけんのモーション
