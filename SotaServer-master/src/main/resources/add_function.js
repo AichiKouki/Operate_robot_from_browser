@@ -43,10 +43,10 @@ function onError(event) {
 $(function(){
         $("#motion_button").on("click",function(){
                 var action="index";//仮に設定(indexは反映しない)
-                var data   = [500, 300, -300, 500, 500, -300, 0, 300];
+                var data   = {1:500, 2:300, 3:-300, 4:500, 5:500, 6:-300, 7:0, 8:300};
                 var vals;
                 var speech="";
-                                
+                                                
                 var message = {
                   'action': action,
                   'data'  : data,
