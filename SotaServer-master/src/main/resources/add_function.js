@@ -43,7 +43,7 @@ function onError(event) {
 $(function(){
         $("#motion_button").on("click",function(){
                 var action="index";//仮に設定(indexは反映しない)
-                var data   = {1:500, 2:300, 3:-300, 4:500, 5:500, 6:-300, 7:0, 8:300};
+                var data   = ReturnMotionId($(this).val());
                 var vals;
                 var speech="";
                                                 
@@ -57,6 +57,14 @@ $(function(){
 
         });
 });
+
+//ボタンの種類によって、モーションの座標をreturnする関数
+function ReturnMotionId(motionFamily){
+    var array;
+    if(motionFamily=="kanghu")  array = {1:500, 2:300, 3:-300, 4:500, 5:500, 6:-300, 7:0, 8:300};
+    else  array = {1:0, 2:-900, 3:-0, 4:900, 5:0, 6:-0, 7:0, 8:0};
+    return array;
+}
 
 // ConnectionHandler start
 ConnectionHandler = {
