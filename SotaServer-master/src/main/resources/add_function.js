@@ -45,7 +45,7 @@ $(function(){
                 var action="index";//仮に設定(indexは反映しない)
                 var data   = ReturnMotionId($(this).val());
                 var vals;
-                var speech="";
+                var speech = ReturnSpeechContent($(this).val());
                                                 
                 var message = {
                   'action': action,
@@ -64,6 +64,15 @@ function ReturnMotionId(motionFamily){
     if(motionFamily=="azatoi")  array = {1:0, 2:180, 3:-850, 4:-180, 5:850, 6:-0, 7:0, 8:0};
     else  array = {1:0, 2:-900, 3:-0, 4:900, 5:0, 6:-0, 7:0, 8:0};
     return array;
+}
+
+//ボタンの種類によって、喋る内容をreturnする関数
+function ReturnSpeechContent(speechFamily){
+    var str;
+    if(motionFamily=="azatoi") str="あざといポーズだよ。可愛いでしょ？";
+    else str="こんにちは、僕はそーたくんだよ";
+    
+    return str;
 }
 
 // ConnectionHandler start
