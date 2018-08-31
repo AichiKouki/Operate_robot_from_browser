@@ -61,7 +61,7 @@ $(function(){
 //ボタンの種類によって、モーションの座標をreturnする関数
 function ReturnMotionId(motionFamily){
     var array;
-    if(motionFamily=="kanghu")  array = {1:500, 2:300, 3:-300, 4:500, 5:500, 6:-300, 7:0, 8:300};
+    if(motionFamily=="azatoi")  array = {1:0, 2:180, 3:-850, 4:-180, 5:850, 6:-0, 7:0, 8:0};
     else  array = {1:0, 2:-900, 3:-0, 4:900, 5:0, 6:-0, 7:0, 8:0};
     return array;
 }
