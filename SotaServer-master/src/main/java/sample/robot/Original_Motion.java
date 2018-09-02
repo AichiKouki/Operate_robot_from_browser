@@ -14,7 +14,7 @@ import jp.vstone.sotatalk.TextToSpeechSota;
  */
 public class Original_Motion {
 	static final String TAG = "Original_Motion";
-	public void do_motion(String motion_family){
+	public void do_motion(String motion_family,String speech_content){
 		CRobotUtil.Log(TAG, "Start " + TAG);
 
 		CRobotPose pose;
@@ -130,7 +130,10 @@ public class Original_Motion {
 		CRobotUtil.Log(TAG, "play:" + motion.play(pose,1000));
 		//補間完了まで待つ
 		motion.waitEndinterpAll();
-
+		//セリフを乱数でランダムに
+		String content="";
+		//乱数処理
+		
 		CPlayWave.PlayWave(TextToSpeechSota.getTTSData("勝てたかな？。僕はグーしか出せないのにパーを出していないことを祈ります。",10,13,11),true);
 	}
 }

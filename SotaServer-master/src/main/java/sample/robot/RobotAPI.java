@@ -33,7 +33,7 @@ public class RobotAPI {
     if(json.action.contains("original")){
         LOG.info("愛知愛知、Original_Motionメソッドが呼ばれる");
     	Original_Motion original_motion = new Original_Motion();
-    	original_motion.do_motion(json.action);
+    	original_motion.do_motion(json.action,json.speech);
     }else{
     LOG.info("愛知愛知、actionの値は"+json.action);
     LOG.info("愛知愛知、dataの値は"+json.data);    

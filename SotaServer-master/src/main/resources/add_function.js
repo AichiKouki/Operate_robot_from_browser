@@ -69,7 +69,7 @@ function ReturnMotionId(motionFamily){
 //ボタンの種類によって、喋る内容をreturnする関数
 function ReturnSpeechContent(speechFamily){
     var str;
-    if(motionFamily=="azatoi") str="あざといポーズだよ。可愛いでしょ？";
+    if(speechFamily=="azatoi") str="あざといポーズだよ。可愛いでしょ？";
     else str="こんにちは、僕はそーたくんだよ";
     
     return str;

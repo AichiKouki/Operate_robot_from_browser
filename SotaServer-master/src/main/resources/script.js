@@ -77,7 +77,7 @@ MessageBox = {
     var vals = document.querySelectorAll('input[name="data[val][]"]');
     switch(action) {
       case 'index':
-        [0, 0, -800, 0, 800, 0, 50, 0].map(function(v, i) { vals[i].value = v;});
+        [0   ,-900   ,0   ,900   ,0   ,0   ,0   ,0].map(function(v, i) { vals[i].value = v;});
         break;
       case 'kangFu':
         [500, 300, -300, 500, 500, -300, 0, 300].map(function(v, i) { vals[i].value = v;});

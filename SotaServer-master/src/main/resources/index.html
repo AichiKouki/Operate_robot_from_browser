@@ -35,13 +35,13 @@
     <form id="createMessage">
       <fieldset>
         <legend>喋る言葉と動きを指定</legend>
-        <label for="action">Action: </label>
+        <label for="action">モーションの種類: </label>
        
         <select name="action">
-          <option value="index">index</option>
-          <option value="kangFu">kangFu</option>
-          <option value="banzai">banzai</option>
-          <option value="manual">manual</option>
+          <option value="index">通常</option>
+          <option value="kangFu">カンフー</option>
+          <option value="banzai">バンザイ</option>
+          <option value="manual">マニュアル</option>
           <option value="original1">あざといポーズ</option>
           <option value="original2">じゃんけん</option>
         </select>
@@ -128,9 +128,10 @@
 <button id="frequent_words5">シャンシャイン池崎</button>
 </div>
 
+<hr>
 <!--ボタンを押したらすぐに任意のモーションをさせるためのボタン-->
 <div>
-<input type="image" src="images/button1.png" value="azatoi" id="motion_button">
+<input type="button" value="azatoi" id="motion_button">
 </div>
 </body>
 </html>
